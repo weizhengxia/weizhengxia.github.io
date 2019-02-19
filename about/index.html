@@ -8,12 +8,12 @@
   
   
   
-  <title>弱网测试工具篇（fiddler） | 云空的泪</title>
+  <title>关于 | 云空的泪</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="测试工具,android,fiddler,">
+    <meta name="keywords" content="Hexo, theme-bmw">
   
 
   <script>
@@ -183,142 +183,15 @@
 
 
 
-
-
-<div class="container post-index">
-
-  
-
-<div class="post">
-  <h1 class="article-title">
-    <span>弱网测试工具篇（fiddler）</span>
-  </h1>
-  <div class="article-top-meta">
-    <span>
-      发布 : 
-      2019-02-19
-    </span>
-    
-      <span>
-        分类 : 
-          <a href="/categories/测试工具/">
-            测试工具
-          </a>
-      </span>
-    
-    
-  </div>
-
-  
-    <div id="2019-02-19-弱网测试工具篇-fiddler" style="margin: 4rem 2px"></div>
-<script async>
-  (function(){
-    let playerTimer = setInterval(function(){
-      if(!window.APlayer){
-        return
-      }
-
-      new APlayer({
-        container: document.getElementById('2019-02-19-弱网测试工具篇-fiddler'),
-        theme: '#e96900',
-        listFolded: false,
-        audio: [{"name":"Where are you","artist":"AniFace","url":"//music.163.com/song/media/outer/url?id=453843751.mp3","cover":"//p1.music.126.net/AUfXMljLBgB3PBV731IzRg==/109951162857118370.jpg?param=130y130"}]
-      });
-      
-      clearInterval(playerTimer)
-    }, 10);
-  })()
-</script>
-  
-
-  <div class="article-content">
+  <div class="container about-index">
     <div class="markdown-body">
-      <h3 id="1-安装fiddler"><a href="#1-安装fiddler" class="headerlink" title="1.安装fiddler"></a>1.安装fiddler</h3><p>下载：<a href="http://rj.baidu.com/soft/detail/10963.html?ald" target="_blank" rel="noopener">http://rj.baidu.com/soft/detail/10963.html?ald</a><br>安装：和普通程序安装差不多，一直点下一步即可</p>
-<h3 id="2-fiddler设置代理网络端口"><a href="#2-fiddler设置代理网络端口" class="headerlink" title="2.fiddler设置代理网络端口"></a>2.fiddler设置代理网络端口</h3><p>电脑连接无线网络（如9979），打开fiddler,点击菜单Tools-Fiddler Options，在弹出窗口中点击Connections ，设置端口号，一般默认8888，勾选Allow remote computers to connect,重启Fiddler<br><img src="/2019/02/19/2019-02-19-弱网测试工具篇-fiddler/fiddler设置代理网络端口.png" alt></p>
-<h3 id="3-手机连接代理网络"><a href="#3-手机连接代理网络" class="headerlink" title="3.手机连接代理网络"></a>3.手机连接代理网络</h3><p>在手机设置&gt;WLAN列表中找到9979，点击后选中修改网络，勾线显示高级选项设置，代理设置选中手动，输入电脑IP（ipconfig命令查看）和Fiddler设置的端口号<br><img src="/2019/02/19/2019-02-19-弱网测试工具篇-fiddler/查看IP.png" alt>  </p>
-<p><img src="/2019/02/19/2019-02-19-弱网测试工具篇-fiddler/手机设置连接代理网络.png" alt></p>
-<h3 id="4-fiddler设置网络延迟时间"><a href="#4-fiddler设置网络延迟时间" class="headerlink" title="4.fiddler设置网络延迟时间"></a>4.fiddler设置网络延迟时间</h3><ul>
-<li>修改网络延迟时间<br>点击Rules-&gt;Customize Rules打开脚本Customize.js,找到“if (m_SimulateModem)”代码行,修改上行和下行网络延迟时间</li>
-</ul>
-<p><img src="/2019/02/19/2019-02-19-弱网测试工具篇-fiddler/fiddler修改网络延迟时间.png" alt></p>
-<p>红框内标出的就是设置延迟时可以操作的上行和下行网络延迟时间，意为每上传／下载1KB的数据要延迟多少毫秒。这里把请求（上行）时间延迟设置为3000ms，响应（下行）时间延迟设置为1000ms（模拟了2G网络的速度）。</p>
-<ul>
-<li>延迟时间计算方法<br>通过计算上行和下行的网络延迟时间，可以模拟出想要的网络效果。利用 <code>（1KB/下载速度）x1000 = 要delay的毫秒数</code> 来计算。比如我们要模拟2G的网络。2G网络上行和下行的网络速度如下图所示：</li>
-</ul>
-<p><img src="/2019/02/19/2019-02-19-弱网测试工具篇-fiddler/2G网络上行下载速率.png" alt></p>
-<p>从上图我们看到，在各种制式下上行速度都是2.7kb/s，下行速度是9.6kb/s，根据1KB=8kb，可以计算出上行延迟为(1/(2.7/8))x1000=2962ms ,同理下行延迟未(1/(2.7/8))x1000=833ms。这里我取了近似整值3000ms和1000ms，模拟了2G网络</p>
-<h3 id="5-fiddler开启网络延迟功能"><a href="#5-fiddler开启网络延迟功能" class="headerlink" title="5.fiddler开启网络延迟功能"></a>5.fiddler开启网络延迟功能</h3><p>点击fiddler菜单Rules – Performance – Simulate Modem Speeds，Simulate Modem Speeds显示勾选表明已开启网络延迟功能<br><img src="/2019/02/19/2019-02-19-弱网测试工具篇-fiddler/fiddler开启网络延迟功能.jpg" alt></p>
-<h3 id="6-手机端验证弱网测试"><a href="#6-手机端验证弱网测试" class="headerlink" title="6.手机端验证弱网测试"></a>6.手机端验证弱网测试</h3><p>访问要测试的产品（如360手机助手）首页进行功能测试<br>同时可查看手机流量监控软件（如360安全卫士流量监控浮窗）监控当前网速<br><img src="/2019/02/19/2019-02-19-弱网测试工具篇-fiddler/弱网测试产品.png" alt></p>
+      
     </div>
-  </div>
-  
-    <div class="copy-right">
-      <div class="markdown-body">
-        <blockquote>
-        
-        
-          本文作者 : weizhengxia <br>
-        
-        原文链接 : <a href>http://yoursite.com/2019/02/19/2019-02-19-弱网测试工具篇-fiddler/</a><br>
-        版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
-        </blockquote>
-      </div>
-    </div>
-  
-  
-  
-    <div class="social-share" style="margin-top: -2rem" data-wechat-qrcode-title="<p>微信扫一扫</p>" data-wechat-qrcode-helper="<p>微信右上角, 扫一扫分享</p>" data-sites="qzone, qq, weibo, wechat, douban, google, facebook, twitter">
-  <span style="color: #6b7487; font-size: 1.4rem;">分享到: </span>
-</div>
-<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js" async></script>
-  
-
-  
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-      <span>
-        
-          <i class="iconfont icon-06tags"></i>标签: 
-          
-          <span class="span--tag">
-            <a href="/tags/android/">
-              #android
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/fiddler/">
-              #fiddler
-            </a>
-          </span>
-          
-        
-      </span>
-    </div>
-    <div class="article-meta pull-right">
-    </div>
-  </div>
-</div>
-
-
-  <aside id="sidebar">
-    <p id="sidebar-header"></p>
-    <ol id="sidebar-toc"></ol>
-  </aside>
-  <script async>setTimeout(generateToc, 10);</script>
-
-
-  <nav class="post-navigation">
     
-    
-  </nav>
+     
+  </div>
 
-   
 
-   
-
-</div>
 
 
       <footer>
